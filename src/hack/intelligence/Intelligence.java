@@ -76,17 +76,26 @@ public class Intelligence
 		System.out.println("Done with writing fraudulant customer data into file..");
 	}
 
-	public static void generateFradulantCustomerData(){
+	public static void generateFradulantCustomerData()
+	{	
+		File file = FileUtils.getFile(Constants.OUTPUT_FILE_NAME);
+		FileUtils.deleteQuietly(file);
+		try {
+			FileUtils.writeStringToFile(file, Constants.OUTPUT_FILE_HEADER + "\n", true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		identifyFraudCustomers(SalaryLevel.LOW_SALARIED);
-		identifyFraudCustomers(SalaryLevel.MID_SALARIED);
-		identifyFraudCustomers(SalaryLevel.HIGH_SALARIED);
+		identifyFraudCustomers(file, SalaryLevel.LOW_SALARIED);
+		identifyFraudCustomers(file, SalaryLevel.MID_SALARIED);
+		identifyFraudCustomers(file, SalaryLevel.HIGH_SALARIED);
+
 		System.out.println("Completed");
 	}
 	
 	
 	
-	private static void identifyFraudCustomers(SalaryLevel salaryLevel) 
+	private static void identifyFraudCustomers(File file, SalaryLevel salaryLevel) 
 	{
 		Float minSal = 0.0f;
 		Float salVal = 0.0f;
@@ -223,5 +232,23 @@ public class Intelligence
 		//Write the analysis findings into database
 		DBUtility.insertResult(resultDataList);
 		
+		writeOutputFile(file, resultDataList);
+	}
+
+	private static void writeOutputFile(File file, List<ResultData> resultDataList) 
+	{
+		
+		try
+		{
+			
+			for(ResultData resultData: resultDataList)
+			{
+				FileUtils.writeStringToFile(file, resultData.toString() + "\n", true);
+			}
+		}
+		catch(IOException ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 }

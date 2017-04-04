@@ -20,6 +20,7 @@ public class Constants {
 	
 	public static final String CUST_DATA_FILE_NAME = props.getProperty("input_cust_file_name");
 	public static final String TXN_DATA_FILE_NAME = props.getProperty("input_txn_file_name");
+	public static final String OUTPUT_FILE_NAME = props.getProperty("output_file_name");
 	public static final String FILE_DELIMITER = props.getProperty("file_delimiter");
 	public static final Float LOW_SALARY_VAL = Float.parseFloat(props.getProperty("lowsal"));
 	public static final Float MID_SALARY_VAL = Float.parseFloat(props.getProperty("midsal"));
@@ -100,6 +101,7 @@ public class Constants {
 	
 	public static final Integer FRAUD_CUST_CODE = 1;
 	public static final Integer SAFE_CUST_CODE = 0;
+	public static final String OUTPUT_FILE_HEADER = "CUSTOMER_ID, CREDIT_TXN_COUNT_AFTER_DEMONITIZATION, DEBIT_TXN_COUNT_AFTER_DEMONITIZATION, IS_FRAUDULANT";
 	
 	private static void loadProperties() 
 	{

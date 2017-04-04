@@ -1,5 +1,7 @@
 package hack.pojo;
 
+import hack.constants.Constants;
+
 public class ResultData {
 
 	private Integer customer_Id;
@@ -33,6 +35,14 @@ public class ResultData {
 		this.is_fraudulant = is_fraudulant;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return this.getCustomer_Id() + Constants.FILE_DELIMITER +
+				this.getCredit_transaction() + Constants.FILE_DELIMITER +
+				this.getDebit_transaction() + Constants.FILE_DELIMITER +
+				this.getIs_fraudulant();
+				
+	}
+
 	
 }
